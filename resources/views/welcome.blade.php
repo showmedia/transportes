@@ -15,30 +15,35 @@
         </button>
     </section>
     <div class="lista">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Data</th>
-                    <th>Cliente</th>
-                    <th>Local</th>
-                    <th>Valor</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
+
                 @foreach($fretes->reverse() as $frete)
-                    <tr class="{{$frete->pago ? 'table-success' : ''}}">
-                        <td>{{ date('d/m/Y', strtotime($frete->data)) }}</td>
-                        <td> {{ $frete->empresa->nome ?? ''}} </td>
-                        <td> {{ $frete->local ?? '' }} </td>
-                        <td> {{'R$ '.number_format($frete->valor,2,',','.')}} </td>
-                        <td> 
-                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$frete->id}}"><ion-icon name="trash-outline"></ion-icon></button>
+
+                <div class="card {{$frete->pago ? 'bg-success-subtle' : ''}}">
+                <div class="card-body">
+                  <p>
+                    <strong>Data: {{ date('d/m', strtotime($frete->data)) }} </strong> <br>
+                    <strong>Cliente: </strong> {{$frete->empresa->nome ?? ''}} <br>
+                    <strong>Local: </strong> {{ $frete->local ?? '' }} <br>
+                    <strong>Valor: </strong>R$ {{ number_format($frete->valor, 2,',','.') }} <br>
+                  </p>
+
+                  @foreach($frete->infos->reverse() as $info)
+                    <p>
+                      <strong> {{date('d/m', strtotime($info->created_at)) }}: </strong> {{$info->descricao ?? ''}}
+                    </p> 
+                  @endforeach
+                  
+                </div>
+                <div class="card-buttons">
+                          <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$frete->id}}"><ion-icon name="trash-outline"></ion-icon> Deletar</button>
                             @if(!$frete->pago)
-                            <button class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#pago{{$frete->id}}"> <ion-icon name="card-outline"></ion-icon> </button>
+                            <button class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#pago{{$frete->id}}"> <ion-icon name="card-outline"></ion-icon> Pago</button>
                             @endif
-                        </td>
-                    </tr>
+                            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#info{{$frete->id}}">+ Observações</button>
+                </div>
+              </div>
+
+                   
 
                     <!-- Modal -->
 <div class="modal fade" id="pago{{$frete->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -60,6 +65,36 @@
 
         </form>
     </div>
+    </div>
+  </div>
+</div>
+
+                   <!-- Modal -->
+                   <div class="modal fade" id="info{{$frete->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar Informação?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="/info/{{$frete->id}}" method="post">
+        @csrf 
+
+      
+      <div class="modal-body">
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Adicione uma informação</label>
+        <textarea class="form-control" name="descricao" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        
+        <button type="button" onclick="this.disabled = true; this.innerHTML = 'Adicionando..'; this.form.submit();" class="btn btn-primary">Adicionar</button>
+
+        
+    </div>
+    </form>
     </div>
   </div>
 </div>
@@ -88,8 +123,6 @@
   </div>
 </div>
                 @endforeach
-            </tbody>
-        </table>
     </div>
 </main>
 

@@ -22,3 +22,5 @@ Route::put('/frete/{id}', [FreteController::class, 'update']);
 
 Route::get('/search', [FreteController::class, 'search']);
 Route::post('/search', [FreteController::class, 'welcome']);
+
+Route::post('/info/{id}', [FreteController::class, 'addinfo']);

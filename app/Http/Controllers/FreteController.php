@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Frete;
 use App\Models\Empresa;
+use App\Models\Info;
 
 class FreteController extends Controller
 {
@@ -90,5 +91,13 @@ class FreteController extends Controller
 
     public function search(){
         return view('search');
+    }
+
+    public function addinfo($id, Request $request){
+        $info = new Info;
+        $info->descricao = $request->descricao;
+        $info->fretes_id = $id;
+        $info->save();
+        return redirect('/')->with('msg', 'Informação adicionada');
     }
 }

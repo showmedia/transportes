@@ -61,12 +61,23 @@ main section h2{
     text-align: center;
     padding: 10px;
 }
-.lista-cliente table{
-    margin: 0 auto;
+
+.lista .card {
+    margin-top: 7px;
 }
-.lista-cliente table tr{
-    margin: 10px;
+
+.lista .card .card-buttons{
+    display: block;
+    width: 100%;
+    padding: 10px;
 }
+
+.card .card-buttons button{
+    width: 100%;
+    min-height: 50px;
+    margin-top: 5px;
+}
+
 .lista-cliente h6{
     font-size: 20px;
 }

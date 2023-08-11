@@ -12,4 +12,8 @@ class Frete extends Model
     public function empresa() {
         return $this->belongsTo('App\Models\Empresa', 'empresas_id');
     }
+
+    public function infos() {
+        return $this->hasMany('App\Models\Info', 'fretes_id');
+    }
 }

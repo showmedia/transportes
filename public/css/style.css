@@ -1,0 +1,72 @@
+body{
+    margin: 0;
+    width: 100%;
+}
+main{
+    width: 100%;
+    max-width: 800px;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+    margin: 0 auto;
+    padding-top: 40px;
+    border: 1px solid #d3d3d3;
+}
+main section{
+    text-align: center;
+}
+main section h2{
+    text-align: center;
+    color: #aaa;
+}
+
+.cadastrar{
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    width: 180px;
+    height: 80px;
+    margin-top: 20px;
+    background-color: #d9d9d9;
+    font-weight: bold;
+}
+
+.cadastrar:hover{
+    border: 1px solid #aaa;
+}
+
+.lista{
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.lista table{
+    margin: 10px;
+}
+
+.lista form input{
+    min-height: 60px !important;
+}
+
+.primary{
+    background-color: blueviolet;
+    color: #fff;
+    font-size: 18px;
+}
+
+.lista-cliente{
+    width: 100%;
+    margin: 5px;
+    background-color: antiquewhite;
+    text-align: center;
+    padding: 10px;
+}
+.lista-cliente table{
+    margin: 0 auto;
+}
+.lista-cliente table tr{
+    margin: 10px;
+}
+.lista-cliente h6{
+    font-size: 20px;
+}
